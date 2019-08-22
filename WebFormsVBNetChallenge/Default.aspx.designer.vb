@@ -12,4 +12,22 @@ Option Explicit On
 
 
 Partial Public Class _Default
+    
+    '''<summary>
+    '''txtProductName control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtProductName As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''productsTable control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents productsTable As Global.System.Web.UI.WebControls.GridView
 End Class

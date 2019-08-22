@@ -8,7 +8,7 @@ Public Class ProductService
         Throw New NotImplementedException()
     End Sub
 
-    Public Overrides Sub Update(oldEntity As Product, newEntity As Product)
+    Public Overrides Sub Update(entity As Product)
         Throw New NotImplementedException()
     End Sub
 
@@ -16,23 +16,49 @@ Public Class ProductService
         Throw New NotImplementedException()
     End Sub
 
-    Public Overrides Async Function GetAllAsync() As Task(Of List(Of Product))
+    Public Overrides Function GetAll() As List(Of Product)
         Try
             Dim products As List(Of Product) = New List(Of Product)
 
-            Using connection = New SqlConnection(ConnectionString)
-                Using command = New SqlCommand("GetProducts", connection)
+            Using connection As SqlConnection = New SqlConnection(ConnectionString)
+                connection.Open()
+
+                Using command As SqlCommand = connection.CreateCommand()
+                    command.CommandText = "GetProducts"
                     command.CommandType = CommandType.StoredProcedure
 
-                    Await connection.OpenAsync()
+                    Using reader As SqlDataReader = command.ExecuteReader(CommandBehavior.CloseConnection)
+                        Dim product As Product
+                        Dim productType As ProductType
 
-
-
-                    connection.Close()
+                        While reader.Read
+                            productType = New ProductType() With
+                            {
+                                .Id = Integer.Parse(reader("ProductTypeId").ToString),
+                                .Name = reader("ProductTypeName").ToString
+                            }
+                            product = New Product() With
+                            {
+                                .Id = Integer.Parse(reader("Id").ToString),
+                                .Identifier = reader("Identifier").ToString,
+                                .Description = reader("Description").ToString,
+                                .ProductTypeId = Integer.Parse(reader("ProductTypeId").ToString),
+                                .ProductType = productType,
+                                .Price = Decimal.Parse(reader("Price").ToString),
+                                .CreationDate = Date.Parse(reader("CreationDate").ToString),
+                                .ProductStatus = Integer.Parse(reader("ProductStatus").ToString)
+                            }
+                            products.Add(product)
+                        End While
+                    End Using
                 End Using
+
+                connection.Close()
             End Using
+
+            Return products
         Catch ex As Exception
-            Throw New Exception(ex.Message)
+            Throw ex
         End Try
     End Function
 End Class
