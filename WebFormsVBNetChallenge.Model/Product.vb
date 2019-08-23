@@ -69,10 +69,4 @@
             productStatusField = value
         End Set
     End Property
-
-    Public ReadOnly Property ProductTypeName() As String
-        Get
-            Return productTypeField.Name
-        End Get
-    End Property
 End Class

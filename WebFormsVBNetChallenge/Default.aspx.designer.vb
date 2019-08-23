@@ -14,6 +14,15 @@ Option Explicit On
 Partial Public Class _Default
     
     '''<summary>
+    '''btnAdd control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnAdd As Global.System.Web.UI.WebControls.Button
+    
+    '''<summary>
     '''txtProductName control.
     '''</summary>
     '''<remarks>
@@ -23,11 +32,20 @@ Partial Public Class _Default
     Protected WithEvents txtProductName As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
-    '''productsTable control.
+    '''btnSearch control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents productsTable As Global.System.Web.UI.WebControls.GridView
+    Protected WithEvents btnSearch As Global.System.Web.UI.WebControls.Button
+    
+    '''<summary>
+    '''productsRepeater control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents productsRepeater As Global.System.Web.UI.WebControls.Repeater
 End Class

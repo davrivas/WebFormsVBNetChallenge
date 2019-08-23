@@ -1,30 +1,49 @@
-﻿<%@ Page Title="Products" Language="VB" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Default.aspx.vb" Inherits="WebFormsVBNetChallenge._Default" %>
+﻿<%@ Page Title="Products" Language="VB" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Default.aspx.vb" Inherits="WebFormsVBNetChallenge._Default" EnableEventValidation="false" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
 
-    <div>
-        <asp:TextBox runat="server" ID="txtProductName" />
+    <div class="mb-3">
+        <h2>Products</h2>
+
+        <asp:Button runat="server" ID="btnAdd" Text="Create product" CssClass="btn btn-primary" OnClick="BtnAdd_Click" />
+
+        <div class="row">
+            <div class="col-6">
+                <asp:TextBox runat="server" ID="txtProductName" CssClass="form-control" placeholder="Type identifier or description" />
+            </div>
+            <div class="col-6">
+                <asp:Button runat="server" ID="btnSearch" Text="Search for products" CssClass="btn btn-primary" OnClick="BtnSearch_Click" />
+            </div>
+        </div>
     </div>
 
-    <asp:GridView runat="server" ID="productsTable" ItemType="WebFormsVBNetChallenge.Model.Product" DataKeyNames="Id">
-        <Columns>
-            <asp:DynamicField DataField="Identifier" />
-            <asp:DynamicField DataField="Description" />
-            <asp:DynamicField DataField="ProductTypeName" />
-            <asp:DynamicField DataField="ProductStatus" />
-        </Columns>
-        <%--<asp:TableHeaderRow>
-            <asp:TableHeaderCell>Identifier</asp:TableHeaderCell>
-            <asp:TableHeaderCell>Description</asp:TableHeaderCell>
-            <asp:TableHeaderCell>Product type</asp:TableHeaderCell>
-            <asp:TableHeaderCell>Product status</asp:TableHeaderCell>
-        </asp:TableHeaderRow>
-       <asp:TableRow 
-        <asp:Repeater runat="server" ID="ProductTypeRepeater" >
-            <asp:TableRow></asp:TableRow>
-        </asp:Repeater>--%>
-    </asp:GridView>
-
-    
+    <table class="table table-striped table-responsive">
+        <asp:Repeater runat="server" ID="productsRepeater" ItemType="WebFormsVBNetChallenge.Model.Product">
+            <HeaderTemplate>
+                <tr>
+                    <th>Identifier</th>
+                    <th>Description</th>
+                    <th>Product type</th>
+                    <th>Product status</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+            </HeaderTemplate>
+            <ItemTemplate>
+                <tr>
+                    <td><%# Eval("Identifier") %></td>
+                    <td><%# Eval("Description") %></td>
+                    <td><%# Eval("ProductType.Name") %></td>
+                    <td><%# Eval("ProductStatus") %></td>
+                    <td>
+                        <asp:Button ID="btnEdit" CommandArgument='<%# Eval("Id") %>' Text="Edit" runat="server" CssClass="btn btn-warning" OnClick="BtnEdit_Click" />
+                    </td>
+                    <td>
+                        <asp:Button ID="btnDelete" CommandArgument='<%# Eval("Id") %>' Text="Delete" runat="server" CssClass="btn btn-danger" OnClick="BtnDelete_Click" />
+                    </td>
+                </tr>
+            </ItemTemplate>
+        </asp:Repeater>
+    </table> 
 
 </asp:Content>
