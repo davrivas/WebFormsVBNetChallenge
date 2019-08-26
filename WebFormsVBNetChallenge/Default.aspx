@@ -3,9 +3,9 @@
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
 
     <div class="mb-3">
-        <h2>Products</h2>
-
-        <asp:Button runat="server" ID="btnAdd" Text="Create product" CssClass="btn btn-primary" OnClick="BtnAdd_Click" />
+        <button class="btn btn-primary mb-2" data-toggle="modal" data-target="#addProductModal">
+            Create product
+        </button>
 
         <div class="row">
             <div class="col-6">
@@ -44,6 +44,5 @@
                 </tr>
             </ItemTemplate>
         </asp:Repeater>
-    </table> 
-
+    </table>
 </asp:Content>

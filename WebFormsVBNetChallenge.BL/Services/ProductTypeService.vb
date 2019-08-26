@@ -12,7 +12,7 @@ Public Class ProductTypeService
         Throw New NotImplementedException()
     End Sub
 
-    Public Overrides Sub Delete(entity As ProductType)
+    Public Overrides Sub Delete(id As Integer)
         Throw New NotImplementedException()
     End Sub
 

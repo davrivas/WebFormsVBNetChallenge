@@ -131,7 +131,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="AddProduct.aspx" />
-    <Content Include="AddProductType.aspx" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-reboot.css" />
@@ -140,8 +139,6 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
     <Content Include="Default.aspx" />
-    <Content Include="EditProduct.aspx" />
-    <Content Include="EditProductType.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="ProductTypes.aspx" />
@@ -213,13 +210,6 @@
       <DependentUpon>AddProduct.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
-    <Compile Include="AddProductType.aspx.designer.vb">
-      <DependentUpon>AddProductType.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="AddProductType.aspx.vb">
-      <DependentUpon>AddProductType.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
-    </Compile>
     <Compile Include="App_Start\BundleConfig.vb" />
     <Compile Include="App_Start\RouteConfig.vb" />
     <Compile Include="Default.aspx.vb">
@@ -228,20 +218,6 @@
     </Compile>
     <Compile Include="Default.aspx.designer.vb">
       <DependentUpon>Default.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="EditProduct.aspx.designer.vb">
-      <DependentUpon>EditProduct.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="EditProduct.aspx.vb">
-      <DependentUpon>EditProduct.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
-    </Compile>
-    <Compile Include="EditProductType.aspx.designer.vb">
-      <DependentUpon>EditProductType.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="EditProductType.aspx.vb">
-      <DependentUpon>EditProductType.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="Global.asax.vb">
       <DependentUpon>Global.asax</DependentUpon>

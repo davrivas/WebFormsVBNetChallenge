@@ -6,5 +6,5 @@ Public MustInherit Class BaseService(Of T)
     Public MustOverride Function GetAll() As List(Of T)
     Public MustOverride Sub Insert(entity As T)
     Public MustOverride Sub Update(entity As T)
-    Public MustOverride Sub Delete(entity As T)
+    Public MustOverride Sub Delete(id As Integer)
 End Class

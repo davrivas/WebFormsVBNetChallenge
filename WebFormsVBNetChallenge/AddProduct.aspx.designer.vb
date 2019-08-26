@@ -77,22 +77,13 @@ Partial Public Class AddProduct
     Protected WithEvents lblProductType As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
-    '''lstProductType control.
+    '''ddlAddProductType control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lstProductType As Global.System.Web.UI.WebControls.ListBox
-    
-    '''<summary>
-    '''lblProductTypeValidation control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents lblProductTypeValidation As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents ddlAddProductType As Global.System.Web.UI.WebControls.DropDownList
     
     '''<summary>
     '''btnAdd control.

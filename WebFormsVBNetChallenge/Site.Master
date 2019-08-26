@@ -51,8 +51,10 @@
                 </ul>
             </div>
         </nav>
-        s
+        
         <div class="container body-content">
+            <h1 class="mb-3 mt-3"><%: Page.Title %></h1>
+
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
             </asp:ContentPlaceHolder>
             <hr />
