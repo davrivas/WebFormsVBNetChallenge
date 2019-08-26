@@ -30,6 +30,7 @@
                 </tr>
             </HeaderTemplate>
             <ItemTemplate>
+                <% If productsRepeater.Items.Count > 0 %>
                 <tr>
                     <td><%# Eval("Identifier") %></td>
                     <td><%# Eval("Description") %></td>
@@ -42,6 +43,15 @@
                         <asp:Button ID="btnDelete" CommandArgument='<%# Eval("Id") %>' Text="Delete" runat="server" CssClass="btn btn-danger" OnClick="BtnDelete_Click" />
                     </td>
                 </tr>
+                <% Else %>
+                <tr>
+                    <td colspan="6">
+                        <span class="text-center">
+                            <em>There are no products to show</em>
+                        </span>
+                    </td>
+                </tr>
+                <% End If %>
             </ItemTemplate>
         </asp:Repeater>
     </table>

@@ -6,7 +6,7 @@ Public Class _Default
     Private ReadOnly _productService As ProductService = New ProductService
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As EventArgs) Handles Me.Load
-        productsRepeater.DataSource = _productService.GetAll
+        productsRepeater.DataSource = _productService.SearchProduct(txtProductName.Text)
         productsRepeater.DataBind()
     End Sub
 

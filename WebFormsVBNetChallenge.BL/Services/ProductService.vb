@@ -95,33 +95,7 @@ Public Class ProductService
     End Sub
 
     Public Overrides Function GetAll() As List(Of Product)
-        Try
-            Dim products As List(Of Product) = New List(Of Product)
-
-            Using connection As SqlConnection = New SqlConnection(ConnectionString)
-                connection.Open()
-
-                Using command As SqlCommand = connection.CreateCommand()
-                    command.CommandText = "GetProducts"
-                    command.CommandType = CommandType.StoredProcedure
-
-                    Using reader As SqlDataReader = command.ExecuteReader(CommandBehavior.CloseConnection)
-                        Dim product As Product
-
-                        While reader.Read
-                            product = GetProduct(reader)
-                            products.Add(product)
-                        End While
-                    End Using
-                End Using
-
-                connection.Close()
-            End Using
-
-            Return products
-        Catch ex As Exception
-            Throw ex
-        End Try
+        Throw New NotImplementedException()
     End Function
 
     Public Function GetProductById(productId As Integer) As Product
