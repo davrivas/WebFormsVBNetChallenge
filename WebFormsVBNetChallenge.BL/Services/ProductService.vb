@@ -98,7 +98,7 @@ Public Class ProductService
         Throw New NotImplementedException()
     End Function
 
-    Public Function GetProductById(productId As Integer) As Product
+    Public Overrides Function GetById(id As Integer) As Product
         Try
             Dim product As Product = Nothing
 
@@ -109,7 +109,7 @@ Public Class ProductService
 
                     Dim productIdParameter = command.Parameters.Add("@ProductId", SqlDbType.Int)
 
-                    productIdParameter.Value = productId
+                    productIdParameter.Value = id
 
                     connection.Open()
 
@@ -127,16 +127,16 @@ Public Class ProductService
         End Try
     End Function
 
-    Public Function SearchProduct(search As String)
+    Public Function GetProductByDescription(search As String)
         Try
             Dim products As List(Of Product) = New List(Of Product)
 
             Using connection As SqlConnection = New SqlConnection(ConnectionString)
                 Using command As SqlCommand = connection.CreateCommand()
-                    command.CommandText = "SearchProduct"
+                    command.CommandText = "GetProductByDescription"
                     command.CommandType = CommandType.StoredProcedure
 
-                    Dim searchParameter = command.Parameters.Add("@Search", SqlDbType.NVarChar)
+                    Dim searchParameter = command.Parameters.Add("@Description", SqlDbType.NVarChar)
 
                     searchParameter.Value = IIf(String.IsNullOrWhiteSpace(search), DBNull.Value, String.Format("%{0}%", search))
 

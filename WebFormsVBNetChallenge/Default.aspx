@@ -16,43 +16,48 @@
             </div>
         </div>
     </div>
+    <% If productsRepeater.Items.Count > 0 %>
+    <% Else %>
+    <% End If %>
 
     <table class="table table-striped table-responsive">
-        <asp:Repeater runat="server" ID="productsRepeater" ItemType="WebFormsVBNetChallenge.Model.Product">
-            <HeaderTemplate>
-                <tr>
-                    <th>Identifier</th>
-                    <th>Description</th>
-                    <th>Product type</th>
-                    <th>Product status</th>
-                    <th>Edit</th>
-                    <th>Delete</th>
-                </tr>
-            </HeaderTemplate>
-            <ItemTemplate>
-                <% If productsRepeater.Items.Count > 0 %>
-                <tr>
-                    <td><%# Eval("Identifier") %></td>
-                    <td><%# Eval("Description") %></td>
-                    <td><%# Eval("ProductType.Name") %></td>
-                    <td><%# Eval("ProductStatus") %></td>
-                    <td>
-                        <asp:Button ID="btnEdit" CommandArgument='<%# Eval("Id") %>' Text="Edit" runat="server" CssClass="btn btn-warning" OnClick="BtnEdit_Click" />
-                    </td>
-                    <td>
-                        <asp:Button ID="btnDelete" CommandArgument='<%# Eval("Id") %>' Text="Delete" runat="server" CssClass="btn btn-danger" OnClick="BtnDelete_Click" />
-                    </td>
-                </tr>
-                <% Else %>
-                <tr>
-                    <td colspan="6">
-                        <span class="text-center">
-                            <em>There are no products to show</em>
-                        </span>
-                    </td>
-                </tr>
-                <% End If %>
-            </ItemTemplate>
-        </asp:Repeater>
+        <thead>
+            <tr>
+                <th>Identifier</th>
+                <th>Description</th>
+                <th>Product type</th>
+                <th>Product status</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% If productsRepeater.Items.Count > 0 %>
+            <asp:Repeater runat="server" ID="productsRepeater" ItemType="WebFormsVBNetChallenge.Model.Product">
+                <ItemTemplate>
+                    <tr>
+                        <td><%# Eval("Identifier") %></td>
+                        <td><%# Eval("Description") %></td>
+                        <td><%# Eval("ProductType.Name") %></td>
+                        <td><%# Eval("ProductStatus") %></td>
+                        <td>
+                            <asp:Button ID="btnEdit" CommandArgument='<%# Eval("Id") %>' Text="Edit" runat="server" CssClass="btn btn-warning" OnClick="BtnEdit_Click" />
+                        </td>
+                        <td>
+                            <asp:Button ID="btnDelete" CommandArgument='<%# Eval("Id") %>' Text="Delete" runat="server" CssClass="btn btn-danger" OnClick="BtnDelete_Click" />
+                        </td>
+                    </tr>
+                </ItemTemplate>
+            </asp:Repeater>
+            <% Else %>
+            <tr>
+                <td colspan="6">
+                    <span class="text-center">
+                        <em>There are no products to show</em>
+                    </span>
+                </td>
+            </tr>
+            <% End If %>
+        </tbody>
     </table>
 </asp:Content>
