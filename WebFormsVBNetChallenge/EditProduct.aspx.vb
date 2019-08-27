@@ -3,8 +3,6 @@
 Public Class EditProduct
     Inherits ChallengePage
 
-
-
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If Not Page.IsPostBack Then
             If Session("ProductId") Is Nothing Then Response.Redirect("Default.aspx")
@@ -19,6 +17,7 @@ Public Class EditProduct
                 ddlProductType.DataBind()
 
                 _SelectedProduct = _ProductService.GetById(Session("ProductId"))
+                btnEdit.CommandArgument = Session("ProductId").ToString
                 Session("ProductId") = Nothing
                 Title = "Edit product (" & _SelectedProduct.Description & ")"
                 lblIdentifier.Text = _SelectedProduct.Identifier
@@ -49,12 +48,16 @@ Public Class EditProduct
 
     Protected Sub BtnEdit_Click(sender As Object, e As EventArgs)
         If ValidateForm() Then
+            If _SelectedProduct Is Nothing Then _SelectedProduct = New Product
+            _SelectedProduct.Id = Integer.Parse(sender.CommandArgument)
             _SelectedProduct.Description = txtDescription.Text
             _SelectedProduct.Price = Decimal.Parse(txtPrice.Text)
             _SelectedProduct.ProductTypeId = Integer.Parse(ddlProductType.SelectedValue)
             _SelectedProduct.ProductStatus = Integer.Parse(ddlProductStatus.SelectedValue)
 
             Try
+                _ProductService.Update(_SelectedProduct)
+                Session("Success") = "Product " & txtDescription.Text & " updated successfully"
                 _SelectedProduct = Nothing
                 Response.Redirect("Default.aspx")
             Catch ex As Exception
