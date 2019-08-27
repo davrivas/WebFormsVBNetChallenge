@@ -3,6 +3,8 @@
 Public Class EditProduct
     Inherits ChallengePage
 
+
+
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If Not Page.IsPostBack Then
             If Session("ProductId") Is Nothing Then Response.Redirect("Default.aspx")
@@ -11,28 +13,34 @@ Public Class EditProduct
                 lblDescriptionValidation.Visible = False
                 lblPriceValidation.Visible = False
 
-                ddlProductType.DataSource = _productTypeService.GetAll
+                ddlProductType.DataSource = _ProductTypeService.GetAll
                 ddlProductType.DataValueField = "Id"
                 ddlProductType.DataTextField = "Name"
                 ddlProductType.DataBind()
 
-                Dim selectedProduct As Product = _productService.GetById(Session("ProductId"))
+                _SelectedProduct = _ProductService.GetById(Session("ProductId"))
                 Session("ProductId") = Nothing
-                Title = "Edit product (" & selectedProduct.Description & ")"
-                lblIdentifier.Text = selectedProduct.Identifier
-                lblCreationDate.Text = selectedProduct.CreationDate.ToString("yyyy/MM/dd hh:mm:ss")
-                txtDescription.Text = selectedProduct.Description
-                txtPrice.Text = selectedProduct.Price.ToString
-                ddlProductType.SelectedValue = selectedProduct.ProductTypeId.ToString
+                Title = "Edit product (" & _SelectedProduct.Description & ")"
+                lblIdentifier.Text = _SelectedProduct.Identifier
+                lblCreationDate.Text = _SelectedProduct.CreationDate.ToString("yyyy/MM/dd hh:mm:ss")
+                txtDescription.Text = _SelectedProduct.Description
+                txtPrice.Text = _SelectedProduct.Price.ToString
+                ddlProductType.SelectedValue = _SelectedProduct.ProductTypeId.ToString
 
-                'check this (show text and store value)
-                If selectedProduct.ProductStatus = ProductStatus.Active Then
-                    ddlProductStatus.Items.Add(ProductStatus.Active)
-                    ddlProductStatus.Items.Add(ProductStatus.Inactive)
+                Dim productStatuses As List(Of ProductStatusClass) = New List(Of ProductStatusClass)
+
+                If _SelectedProduct.ProductStatus = ProductStatus.Active Then
+                    productStatuses.Add(New ProductStatusClass With {.Value = Convert.ToInt32(ProductStatus.Active), .Text = ProductStatus.Active.ToString})
+                    productStatuses.Add(New ProductStatusClass With {.Value = Convert.ToInt32(ProductStatus.Inactive), .Text = ProductStatus.Inactive.ToString})
                 Else
-                    ddlProductStatus.Items.Add(ProductStatus.Inactive)
-                    ddlProductStatus.Items.Add(ProductStatus.Active)
+                    productStatuses.Add(New ProductStatusClass With {.Value = Convert.ToInt32(ProductStatus.Inactive), .Text = ProductStatus.Inactive.ToString})
+                    productStatuses.Add(New ProductStatusClass With {.Value = Convert.ToInt32(ProductStatus.Active), .Text = ProductStatus.Active.ToString})
                 End If
+
+                ddlProductStatus.DataSource = productStatuses
+                ddlProductStatus.DataValueField = "Value"
+                ddlProductStatus.DataTextField = "Text"
+                ddlProductStatus.DataBind()
             Catch ex As Exception
                 HandleException(ex)
             End Try
@@ -40,6 +48,55 @@ Public Class EditProduct
     End Sub
 
     Protected Sub BtnEdit_Click(sender As Object, e As EventArgs)
+        If ValidateForm() Then
+            _SelectedProduct.Description = txtDescription.Text
+            _SelectedProduct.Price = Decimal.Parse(txtPrice.Text)
+            _SelectedProduct.ProductTypeId = Integer.Parse(ddlProductType.SelectedValue)
+            _SelectedProduct.ProductStatus = Integer.Parse(ddlProductStatus.SelectedValue)
 
+            Try
+                _SelectedProduct = Nothing
+                Response.Redirect("Default.aspx")
+            Catch ex As Exception
+                HandleException(ex)
+            End Try
+
+        End If
     End Sub
+
+    Private Function ValidateForm() As Boolean
+        Dim isValid As Boolean = True
+
+        If String.IsNullOrWhiteSpace(txtDescription.Text) Then
+            isValid = False
+            lblDescriptionValidation.Visible = True
+            lblDescriptionValidation.Text = "You must provide a description"
+        Else
+            lblDescriptionValidation.Visible = False
+        End If
+
+        If String.IsNullOrWhiteSpace(txtPrice.Text) Then
+            isValid = False
+            lblPriceValidation.Visible = True
+            lblPriceValidation.Text = "You must provide a price"
+        ElseIf Not IsNumeric(txtPrice.Text) Then
+            isValid = False
+            lblPriceValidation.Visible = True
+            lblPriceValidation.Text = "You must provide a numeric value"
+        ElseIf Decimal.Parse(txtPrice.Text) < 0 Or Decimal.Parse(txtPrice.Text) > Integer.MaxValue Then
+            isValid = False
+            lblPriceValidation.Visible = True
+            lblPriceValidation.Text = "You must provide a value between 0 and " & Integer.MaxValue.ToString
+        Else
+            lblPriceValidation.Visible = False
+        End If
+
+        Return isValid
+    End Function
+
+    Private Class ProductStatusClass
+        Public Property Value As Integer
+        Public Property Text As String
+    End Class
 End Class
+

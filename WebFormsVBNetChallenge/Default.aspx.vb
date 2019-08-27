@@ -7,7 +7,7 @@ Public Class _Default
         If Not Page.IsPostBack Then
             Try
                 Session("ProductId") = Nothing
-                productsRepeater.DataSource = _productService.GetProductByDescription(txtProductName.Text)
+                productsRepeater.DataSource = _ProductService.GetProductByDescription(txtProductName.Text)
                 productsRepeater.DataBind()
             Catch ex As Exception
                 HandleException(ex)
@@ -22,7 +22,7 @@ Public Class _Default
 
     Protected Sub BtnSearch_Click(sender As Object, e As EventArgs)
         Try
-            productsRepeater.DataSource = _productService.GetProductByDescription(txtProductName.Text)
+            productsRepeater.DataSource = _ProductService.GetProductByDescription(txtProductName.Text)
             productsRepeater.DataBind()
         Catch ex As Exception
             HandleException(ex)

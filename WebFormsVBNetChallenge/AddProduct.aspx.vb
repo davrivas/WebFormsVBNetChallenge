@@ -10,7 +10,7 @@ Public Class AddProduct
                 lblDescriptionValidation.Visible = False
                 lblPriceValidation.Visible = False
 
-                ddlProductType.DataSource = _productTypeService.GetAll
+                ddlProductType.DataSource = _ProductTypeService.GetAll
                 ddlProductType.DataValueField = "Id"
                 ddlProductType.DataTextField = "Name"
                 ddlProductType.DataBind()
@@ -29,7 +29,7 @@ Public Class AddProduct
             }
 
             Try
-                _productService.Insert(newProduct)
+                _ProductService.Insert(newProduct)
                 Session("Success") = "Product " & txtDescription.Text & " added successfully"
                 Response.Redirect("Default.aspx")
             Catch ex As Exception

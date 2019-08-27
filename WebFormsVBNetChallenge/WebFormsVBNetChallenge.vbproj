@@ -141,6 +141,7 @@
     <Content Include="Content\toastr.css" />
     <Content Include="Content\toastr.min.css" />
     <Content Include="Default.aspx" />
+    <Content Include="DeleteProduct.aspx" />
     <Content Include="EditProduct.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
@@ -225,6 +226,13 @@
     </Compile>
     <Compile Include="Default.aspx.designer.vb">
       <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DeleteProduct.aspx.designer.vb">
+      <DependentUpon>DeleteProduct.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DeleteProduct.aspx.vb">
+      <DependentUpon>DeleteProduct.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="EditProduct.aspx.designer.vb">
       <DependentUpon>EditProduct.aspx</DependentUpon>
