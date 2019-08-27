@@ -64,5 +64,7 @@
         </div>
 
     </form>
+
+    <script src="Scripts/toastr.min.js"></script>
 </body>
 </html>

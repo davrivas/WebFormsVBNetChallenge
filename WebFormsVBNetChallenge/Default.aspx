@@ -3,22 +3,13 @@
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
 
     <div class="mb-3">
-        <button class="btn btn-primary mb-2" data-toggle="modal" data-target="#addProductModal">
-            Create product
-        </button>
+        <asp:Button ID="btnAdd" CssClass="btn btn-primary mb-2" runat="server" Text="Create product" OnClick="BtnAdd_Click" />
 
         <div class="row">
-            <div class="col-6">
-                <asp:TextBox runat="server" ID="txtProductName" CssClass="form-control" placeholder="Type identifier or description" />
-            </div>
-            <div class="col-6">
-                <asp:Button runat="server" ID="btnSearch" Text="Search for products" CssClass="btn btn-primary" OnClick="BtnSearch_Click" />
-            </div>
+            <asp:TextBox runat="server" ID="txtProductName" CssClass="form-control mr-1" placeholder="Type identifier or description" />
+            <asp:Button runat="server" ID="btnSearch" Text="Search for products" CssClass="btn btn-primary" OnClick="BtnSearch_Click" />
         </div>
     </div>
-    <% If productsRepeater.Items.Count > 0 %>
-    <% Else %>
-    <% End If %>
 
     <table class="table table-striped table-responsive">
         <thead>
@@ -41,9 +32,11 @@
                         <td><%# Eval("ProductType.Name") %></td>
                         <td><%# Eval("ProductStatus") %></td>
                         <td>
+                            <%--maybe pass the whole object--%>
                             <asp:Button ID="btnEdit" CommandArgument='<%# Eval("Id") %>' Text="Edit" runat="server" CssClass="btn btn-warning" OnClick="BtnEdit_Click" />
                         </td>
                         <td>
+                            <%--maybe pass the whole object--%>
                             <asp:Button ID="btnDelete" CommandArgument='<%# Eval("Id") %>' Text="Delete" runat="server" CssClass="btn btn-danger" OnClick="BtnDelete_Click" />
                         </td>
                     </tr>

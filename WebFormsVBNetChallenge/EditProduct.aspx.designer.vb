@@ -11,7 +11,25 @@ Option Strict On
 Option Explicit On
 
 
-Partial Public Class AddProduct
+Partial Public Class EditProduct
+    
+    '''<summary>
+    '''lblIdentifier control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblIdentifier As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''lblCreationDate control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblCreationDate As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
     '''lblDescription control.
@@ -86,11 +104,29 @@ Partial Public Class AddProduct
     Protected WithEvents ddlProductType As Global.System.Web.UI.WebControls.DropDownList
     
     '''<summary>
-    '''btnAdd control.
+    '''lblProductStatus control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnAdd As Global.System.Web.UI.WebControls.Button
+    Protected WithEvents lblProductStatus As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''ddlProductStatus control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents ddlProductStatus As Global.System.Web.UI.WebControls.DropDownList
+    
+    '''<summary>
+    '''btnEdit control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnEdit As Global.System.Web.UI.WebControls.Button
 End Class

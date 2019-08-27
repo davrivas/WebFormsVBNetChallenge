@@ -29,7 +29,7 @@ Public Class ProductService
                     creationDateParameter.Value = Date.Now
 
                     Dim productStatusParameter = command.Parameters.Add("@ProductStatus", SqlDbType.Int)
-                    productStatusParameter.Value = Convert.ToInt32(entity.ProductStatus)
+                    productStatusParameter.Value = Convert.ToInt32(ProductStatus.Active)
 
                     command.ExecuteNonQuery()
                     connection.Close()
