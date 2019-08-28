@@ -18,6 +18,10 @@ Public Class AddProduct
                 HandleException(ex)
             End Try
         End If
+
+        If ErrorMessage IsNot Nothing Then
+            ShowErrorMessage()
+        End If
     End Sub
 
     Protected Sub BtnAdd_Click(sender As Object, e As EventArgs)
@@ -30,7 +34,7 @@ Public Class AddProduct
 
             Try
                 _ProductService.Insert(newProduct)
-                Session("Success") = "Product " & txtDescription.Text & " added successfully"
+                SuccessMessage = "Product " & txtDescription.Text & " was added successfully"
                 Response.Redirect("Default.aspx")
             Catch ex As Exception
                 HandleException(ex)
@@ -67,4 +71,8 @@ Public Class AddProduct
 
         Return isValid
     End Function
+
+    Protected Sub BtnGoBack_Click(sender As Object, e As EventArgs)
+        GoBack("Default.aspx")
+    End Sub
 End Class

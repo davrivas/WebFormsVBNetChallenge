@@ -14,7 +14,6 @@
 
     <webopt:BundleReference runat="server" Path="~/Content/css" />
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
-
 </head>
 <body>
     <form runat="server">
@@ -65,6 +64,6 @@
 
     </form>
 
-    <script src="Scripts/toastr.min.js"></script>
+    <script src="~/Scripts/app/nav-bar.js"></script>
 </body>
 </html>

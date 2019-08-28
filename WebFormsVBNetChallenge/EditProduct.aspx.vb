@@ -5,7 +5,7 @@ Public Class EditProduct
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If Not Page.IsPostBack Then
-            If Session("ProductId") Is Nothing Then Response.Redirect("Default.aspx")
+            If ProductId Is Nothing Then Response.Redirect("Default.aspx")
 
             Try
                 lblDescriptionValidation.Visible = False
@@ -16,49 +16,44 @@ Public Class EditProduct
                 ddlProductType.DataTextField = "Name"
                 ddlProductType.DataBind()
 
-                _SelectedProduct = _ProductService.GetById(Session("ProductId"))
-                btnEdit.CommandArgument = Session("ProductId").ToString
-                Session("ProductId") = Nothing
-                Title = "Edit product (" & _SelectedProduct.Description & ")"
-                lblIdentifier.Text = _SelectedProduct.Identifier
-                lblCreationDate.Text = _SelectedProduct.CreationDate.ToString("yyyy/MM/dd hh:mm:ss")
-                txtDescription.Text = _SelectedProduct.Description
-                txtPrice.Text = _SelectedProduct.Price.ToString
-                ddlProductType.SelectedValue = _SelectedProduct.ProductTypeId.ToString
+                SelectedProduct = _ProductService.GetById(ProductId)
+                btnEdit.CommandArgument = ProductId.ToString
+                ProductId = Nothing
 
-                Dim productStatuses As List(Of ProductStatusClass) = New List(Of ProductStatusClass)
+                lblIdentifier.Text = SelectedProduct.Identifier
+                lblCreationDate.Text = SelectedProduct.CreationDate.ToString("yyyy/MM/dd hh:mm:ss")
+                txtDescription.Text = SelectedProduct.Description
+                txtPrice.Text = SelectedProduct.Price.ToString
+                ddlProductType.SelectedValue = SelectedProduct.ProductTypeId.ToString
 
-                If _SelectedProduct.ProductStatus = ProductStatus.Active Then
-                    productStatuses.Add(New ProductStatusClass With {.Value = Convert.ToInt32(ProductStatus.Active), .Text = ProductStatus.Active.ToString})
-                    productStatuses.Add(New ProductStatusClass With {.Value = Convert.ToInt32(ProductStatus.Inactive), .Text = ProductStatus.Inactive.ToString})
-                Else
-                    productStatuses.Add(New ProductStatusClass With {.Value = Convert.ToInt32(ProductStatus.Inactive), .Text = ProductStatus.Inactive.ToString})
-                    productStatuses.Add(New ProductStatusClass With {.Value = Convert.ToInt32(ProductStatus.Active), .Text = ProductStatus.Active.ToString})
-                End If
-
-                ddlProductStatus.DataSource = productStatuses
-                ddlProductStatus.DataValueField = "Value"
-                ddlProductStatus.DataTextField = "Text"
-                ddlProductStatus.DataBind()
+                ddlProductStatus.Items.Add(New ListItem With {.Value = Convert.ToInt32(ProductStatus.Active).ToString, .Text = ProductStatus.Active.ToString, .Selected = SelectedProduct.ProductStatus = ProductStatus.Active})
+                ddlProductStatus.Items.Add(New ListItem With {.Value = Convert.ToInt32(ProductStatus.Inactive).ToString, .Text = ProductStatus.Inactive.ToString, .Selected = SelectedProduct.ProductStatus = ProductStatus.Inactive})
             Catch ex As Exception
                 HandleException(ex)
             End Try
+        End If
+
+        Title = "Edit product (" & SelectedProduct.Description & ")"
+
+        If ErrorMessage IsNot Nothing Then
+            ShowErrorMessage()
+            ErrorMessage = Nothing
         End If
     End Sub
 
     Protected Sub BtnEdit_Click(sender As Object, e As EventArgs)
         If ValidateForm() Then
-            If _SelectedProduct Is Nothing Then _SelectedProduct = New Product
-            _SelectedProduct.Id = Integer.Parse(sender.CommandArgument)
-            _SelectedProduct.Description = txtDescription.Text
-            _SelectedProduct.Price = Decimal.Parse(txtPrice.Text)
-            _SelectedProduct.ProductTypeId = Integer.Parse(ddlProductType.SelectedValue)
-            _SelectedProduct.ProductStatus = Integer.Parse(ddlProductStatus.SelectedValue)
+            If SelectedProduct Is Nothing Then SelectedProduct = New Product
+            SelectedProduct.Id = Integer.Parse(sender.CommandArgument)
+            SelectedProduct.Description = txtDescription.Text
+            SelectedProduct.Price = Decimal.Parse(txtPrice.Text)
+            SelectedProduct.ProductTypeId = Integer.Parse(ddlProductType.SelectedValue)
+            SelectedProduct.ProductStatus = Integer.Parse(ddlProductStatus.SelectedValue)
 
             Try
-                _ProductService.Update(_SelectedProduct)
-                Session("Success") = "Product " & txtDescription.Text & " updated successfully"
-                _SelectedProduct = Nothing
+                _ProductService.Update(SelectedProduct)
+                SuccessMessage = "Product " & txtDescription.Text & " was updated successfully"
+                SelectedProduct = Nothing
                 Response.Redirect("Default.aspx")
             Catch ex As Exception
                 HandleException(ex)
@@ -97,9 +92,8 @@ Public Class EditProduct
         Return isValid
     End Function
 
-    Private Class ProductStatusClass
-        Public Property Value As Integer
-        Public Property Text As String
-    End Class
+    Protected Sub BtnGoBack_Click(sender As Object, e As EventArgs)
+        GoBack("Default.aspx")
+    End Sub
 End Class
 

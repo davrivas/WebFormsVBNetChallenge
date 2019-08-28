@@ -127,18 +127,18 @@ Public Class ProductService
         End Try
     End Function
 
-    Public Function GetProductByDescription(search As String)
+    Public Function GetProductByDescriptionOrIdentifier(search As String)
         Try
             Dim products As List(Of Product) = New List(Of Product)
 
             Using connection As SqlConnection = New SqlConnection(ConnectionString)
                 Using command As SqlCommand = connection.CreateCommand()
-                    command.CommandText = "GetProductByDescription"
+                    command.CommandText = "GetProductByDescriptionOrIdentifier"
                     command.CommandType = CommandType.StoredProcedure
 
-                    Dim searchParameter = command.Parameters.Add("@Description", SqlDbType.NVarChar)
+                    Dim searchParameter = command.Parameters.Add("@Search", SqlDbType.NVarChar)
 
-                    searchParameter.Value = IIf(String.IsNullOrWhiteSpace(search), DBNull.Value, String.Format("%{0}%", search))
+                    searchParameter.Value = IIf(String.IsNullOrWhiteSpace(search), DBNull.Value, search)
 
                     connection.Open()
 

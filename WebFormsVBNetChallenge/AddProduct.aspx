@@ -22,5 +22,8 @@
         <asp:DropDownList runat="server" ID="ddlProductType" CssClass="form-control" />
     </div>
 
-    <asp:Button ID="btnAdd" runat="server" Text="Add product" CssClass="btn btn-primary" OnClick="BtnAdd_Click" />
+    <div class="row">
+        <asp:Button ID="btnAdd" runat="server" Text="Add product" CssClass="btn btn-primary mr-1" OnClick="BtnAdd_Click" />
+        <asp:Button ID="btnGoBack" runat="server" Text="Go back" CssClass="btn btn-secondary" OnClick="BtnGoBack_Click" />
+    </div>
 </asp:Content>

@@ -93,4 +93,13 @@ Partial Public Class AddProduct
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnAdd As Global.System.Web.UI.WebControls.Button
+    
+    '''<summary>
+    '''btnGoBack control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnGoBack As Global.System.Web.UI.WebControls.Button
 End Class

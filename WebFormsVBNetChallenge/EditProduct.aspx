@@ -51,5 +51,8 @@
         </div>
     </div>
 
-    <asp:Button ID="btnEdit" runat="server" Text="Edit product" CssClass="btn btn-primary" OnClick="BtnEdit_Click" />
+    <div class="row">
+        <asp:Button ID="btnEdit" runat="server" Text="Edit product" CssClass="btn btn-warning mr-1" OnClick="BtnEdit_Click" />
+        <asp:Button ID="btnGoBack" runat="server" Text="Go back" CssClass="btn btn-secondary" OnClick="BtnGoBack_Click" />
+    </div>
 </asp:Content>
