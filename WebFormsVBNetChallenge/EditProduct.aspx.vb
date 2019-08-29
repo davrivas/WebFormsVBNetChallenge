@@ -35,15 +35,11 @@ Public Class EditProduct
 
         Title = "Edit product (" & SelectedProduct.Description & ")"
 
-        If ErrorMessage IsNot Nothing Then
-            ShowErrorMessage()
-            ErrorMessage = Nothing
-        End If
+        If ErrorMessage IsNot Nothing Then ShowErrorMessage()
     End Sub
 
     Protected Sub BtnEdit_Click(sender As Object, e As EventArgs)
         If ValidateForm() Then
-            If SelectedProduct Is Nothing Then SelectedProduct = New Product
             SelectedProduct.Id = Integer.Parse(sender.CommandArgument)
             SelectedProduct.Description = txtDescription.Text
             SelectedProduct.Price = Decimal.Parse(txtPrice.Text)
@@ -58,7 +54,6 @@ Public Class EditProduct
             Catch ex As Exception
                 HandleException(ex)
             End Try
-
         End If
     End Sub
 
@@ -93,7 +88,7 @@ Public Class EditProduct
     End Function
 
     Protected Sub BtnGoBack_Click(sender As Object, e As EventArgs)
-        GoBack("Default.aspx")
+        Response.Redirect("Default.aspx")
     End Sub
 End Class
 

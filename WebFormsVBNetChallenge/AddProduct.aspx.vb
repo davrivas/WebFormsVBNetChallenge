@@ -19,9 +19,7 @@ Public Class AddProduct
             End Try
         End If
 
-        If ErrorMessage IsNot Nothing Then
-            ShowErrorMessage()
-        End If
+        If ErrorMessage IsNot Nothing Then ShowErrorMessage()
     End Sub
 
     Protected Sub BtnAdd_Click(sender As Object, e As EventArgs)
@@ -73,6 +71,6 @@ Public Class AddProduct
     End Function
 
     Protected Sub BtnGoBack_Click(sender As Object, e As EventArgs)
-        GoBack("Default.aspx")
+        Response.Redirect("Default.aspx")
     End Sub
 End Class

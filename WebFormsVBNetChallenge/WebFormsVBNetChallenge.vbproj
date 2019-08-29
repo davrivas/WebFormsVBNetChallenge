@@ -131,6 +131,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="AddProduct.aspx" />
+    <Content Include="AddProductType.aspx" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-reboot.css" />
@@ -140,7 +141,9 @@
     <Content Include="Content\Site.css" />
     <Content Include="Default.aspx" />
     <Content Include="DeleteProduct.aspx" />
+    <Content Include="DeleteProductType.aspx" />
     <Content Include="EditProduct.aspx" />
+    <Content Include="EditProductType.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="ProductTypes.aspx" />
@@ -213,6 +216,13 @@
       <DependentUpon>AddProduct.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="AddProductType.aspx.designer.vb">
+      <DependentUpon>AddProductType.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AddProductType.aspx.vb">
+      <DependentUpon>AddProductType.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="App_Start\BundleConfig.vb" />
     <Compile Include="App_Start\RouteConfig.vb" />
     <Compile Include="Default.aspx.vb">
@@ -229,6 +239,13 @@
       <DependentUpon>DeleteProduct.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="DeleteProductType.aspx.designer.vb">
+      <DependentUpon>DeleteProductType.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DeleteProductType.aspx.vb">
+      <DependentUpon>DeleteProductType.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="EditProduct.aspx.designer.vb">
       <DependentUpon>EditProduct.aspx</DependentUpon>
     </Compile>
@@ -236,9 +253,17 @@
       <DependentUpon>EditProduct.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="EditProductType.aspx.designer.vb">
+      <DependentUpon>EditProductType.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EditProductType.aspx.vb">
+      <DependentUpon>EditProductType.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="Global.asax.vb">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="MessageType.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>

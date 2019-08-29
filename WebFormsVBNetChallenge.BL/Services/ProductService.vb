@@ -14,7 +14,12 @@ Public Class ProductService
                     connection.Open()
 
                     Dim identifierParameter = command.Parameters.Add("@Identifier", SqlDbType.NVarChar)
-                    identifierParameter.Value = CodeGenerator.GenerateCode
+                    'Dim code As String = String.Empty
+
+                    'Do
+
+                    'Loop
+                    identifierParameter.Value = CodeGenerator.GenerateCode ' check if this exists
 
                     Dim descriptionParameter = command.Parameters.Add("@Description", SqlDbType.NVarChar)
                     descriptionParameter.Value = entity.Description
@@ -95,7 +100,7 @@ Public Class ProductService
     End Sub
 
     Public Overrides Function GetAll() As List(Of Product)
-        Throw New NotImplementedException()
+        Throw New NotImplementedException
     End Function
 
     Public Overrides Function GetById(id As Integer) As Product
@@ -159,6 +164,10 @@ Public Class ProductService
         Catch ex As Exception
             Throw ex
         End Try
+    End Function
+
+    Public Function ProductIdentifierExists(identifier As String) As Boolean
+        Throw New NotImplementedException
     End Function
 
     Private Function GetProduct(reader As SqlDataReader) As Product

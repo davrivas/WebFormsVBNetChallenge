@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Add Product" Language="vb" AutoEventWireup="false" MasterPageFile="~/Site.Master" CodeBehind="AddProduct.aspx.vb" Inherits="WebFormsVBNetChallenge.AddProduct" EnableEventValidation="false" %>
+﻿<%@ Page Title="Add product" Language="vb" AutoEventWireup="false" MasterPageFile="~/Site.Master" CodeBehind="AddProduct.aspx.vb" Inherits="WebFormsVBNetChallenge.AddProduct" EnableEventValidation="false" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <div class="form-group">

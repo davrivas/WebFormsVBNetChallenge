@@ -4,9 +4,10 @@ Public Class _Default
     Inherits ChallengePage
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As EventArgs) Handles Me.Load
+        If ProductId IsNot Nothing Then ProductId = Nothing
+
         If Not Page.IsPostBack Then
             Try
-                If ProductId IsNot Nothing Then ProductId = Nothing
                 productsRepeater.DataSource = _ProductService.GetProductByDescriptionOrIdentifier(txtProductName.Text)
                 productsRepeater.DataBind()
             Catch ex As Exception
@@ -14,15 +15,8 @@ Public Class _Default
             End Try
         End If
 
-        If SuccessMessage IsNot Nothing Then
-            ShowSuccessMessage()
-            SuccessMessage = Nothing
-        End If
-
-        If ErrorMessage IsNot Nothing Then
-            ShowErrorMessage()
-            ErrorMessage = Nothing
-        End If
+        If SuccessMessage IsNot Nothing Then ShowSuccessMessage()
+        If ErrorMessage IsNot Nothing Then ShowErrorMessage()
     End Sub
 
     Protected Sub BtnSearch_Click(sender As Object, e As EventArgs)

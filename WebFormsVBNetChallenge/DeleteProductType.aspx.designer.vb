@@ -11,7 +11,25 @@ Option Strict On
 Option Explicit On
 
 
-Partial Public Class DeleteProduct
+Partial Public Class DeleteProductType
+    
+    '''<summary>
+    '''lblValidDelete control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblValidDelete As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''lblInvalidDelete control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblInvalidDelete As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
     '''btnDelete control.

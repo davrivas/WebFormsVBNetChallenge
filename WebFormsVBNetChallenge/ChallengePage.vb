@@ -1,5 +1,4 @@
-﻿Imports WebFormsVBNetChallenge
-Imports WebFormsVBNetChallenge.BL
+﻿Imports WebFormsVBNetChallenge.BL
 Imports WebFormsVBNetChallenge.Model
 
 Public Class ChallengePage
@@ -62,10 +61,6 @@ Public Class ChallengePage
     Protected ReadOnly _ProductService As ProductService = New ProductService
     Protected ReadOnly _ProductTypeService As ProductTypeService = New ProductTypeService
 
-    Protected Sub GoBack(page As String)
-        Response.Redirect(page)
-    End Sub
-
     Private Sub ShowMessage(message As String, messageType As MessageType)
         Dim sb As StringBuilder = New StringBuilder
 
@@ -88,17 +83,14 @@ Public Class ChallengePage
 
     Protected Sub ShowSuccessMessage()
         ShowMessage(SuccessMessage, MessageType.Success)
+        SuccessMessage = Nothing
     End Sub
 
     Protected Sub ShowErrorMessage()
         If Not ErrorMessage.Equals("Thread was being aborted.") Then
             ShowMessage(ErrorMessage, MessageType.ErrorM)
+            ErrorMessage = Nothing
         End If
     End Sub
 
 End Class
-
-Public Enum MessageType
-    Success
-    ErrorM
-End Enum

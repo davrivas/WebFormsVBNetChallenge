@@ -6,12 +6,12 @@
         <asp:Button ID="btnAdd" CssClass="btn btn-primary mb-2" runat="server" Text="Create product" OnClick="BtnAdd_Click" />
 
         <div class="row">
-            <asp:TextBox runat="server" ID="txtProductName" CssClass="form-control mr-1" placeholder="Type description" />
+            <asp:TextBox runat="server" ID="txtProductName" CssClass="form-control mr-1" placeholder="Type description or identifier" />
             <asp:Button runat="server" ID="btnSearch" Text="Search for products" CssClass="btn btn-primary" OnClick="BtnSearch_Click" />
         </div>
     </div>
 
-    <table class="table table-striped table-responsive">
+    <table class="table table-striped">
         <thead>
             <tr>
                 <th>Identifier</th>

@@ -45,8 +45,8 @@
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item"><a class="nav-link" runat="server" href="~/">Products</a></li>
-                    <li class="nav-item"><a class="nav-link" runat="server" href="~/ProductTypes.aspx">Product types</a></li>
+                    <li class="nav-item"><a class="nav-link" runat="server" href="Default">Products</a></li>
+                    <li class="nav-item"><a class="nav-link" runat="server" href="ProductTypes">Product types</a></li>
                 </ul>
             </div>
         </nav>
@@ -64,6 +64,6 @@
 
     </form>
 
-    <script src="~/Scripts/app/nav-bar.js"></script>
+    <script src="Scripts/app/nav-bar.js"></script>
 </body>
 </html>

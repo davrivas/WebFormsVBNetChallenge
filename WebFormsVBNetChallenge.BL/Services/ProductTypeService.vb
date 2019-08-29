@@ -105,6 +105,40 @@ Public Class ProductTypeService
     End Function
 
     Public Overrides Function GetById(id As Integer) As ProductType
-        Throw New NotImplementedException()
+        Try
+            Dim productType As ProductType = New ProductType
+
+            Using connection As SqlConnection = New SqlConnection(ConnectionString)
+                Using command As SqlCommand = connection.CreateCommand()
+                    command.CommandText = "GetProductTypeById"
+                    command.CommandType = CommandType.StoredProcedure
+
+                    Dim idParameter = command.Parameters.Add("@Id", SqlDbType.NVarChar)
+                    idParameter.Value = id
+
+                    connection.Open()
+
+                    Using reader As SqlDataReader = command.ExecuteReader(CommandBehavior.CloseConnection)
+                        If reader.Read Then
+                            productType = New ProductType() With
+                            {
+                                .Id = Integer.Parse(reader("Id").ToString),
+                                .Name = reader("Name").ToString
+                            }
+                        End If
+                    End Using
+
+                    connection.Close()
+                End Using
+            End Using
+
+            Return productType
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Function
+
+    Public Function GetProductTypeProductsCount(id As Integer) As Integer
+        Throw New NotImplementedException
     End Function
 End Class
