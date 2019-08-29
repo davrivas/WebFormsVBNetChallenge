@@ -24,7 +24,7 @@ Public Class AddProduct
 
     Protected Sub BtnAdd_Click(sender As Object, e As EventArgs)
         If ValidateForm() Then
-            Dim newProduct As Product = New Product With {
+            Dim newProduct = New Product With {
                 .Description = txtDescription.Text,
                 .Price = Decimal.Parse(txtPrice.Text),
                 .ProductTypeId = Integer.Parse(ddlProductType.SelectedValue)

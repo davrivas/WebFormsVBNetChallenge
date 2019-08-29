@@ -139,6 +139,28 @@ Public Class ProductTypeService
     End Function
 
     Public Function GetProductTypeProductsCount(id As Integer) As Integer
-        Throw New NotImplementedException
+        Dim count As Integer = 0
+
+        Using connection As SqlConnection = New SqlConnection(ConnectionString)
+            Using command As SqlCommand = connection.CreateCommand()
+                command.CommandText = "GetProductTypeProductsCount"
+                command.CommandType = CommandType.StoredProcedure
+
+                Dim idParameter = command.Parameters.Add("@ProductTypeId", SqlDbType.Int)
+                idParameter.Value = id
+
+                connection.Open()
+
+                Using reader As SqlDataReader = command.ExecuteReader(CommandBehavior.CloseConnection)
+                    If reader.Read Then
+                        count = Integer.Parse(reader("ProductCount").ToString)
+                    End If
+                End Using
+
+                connection.Close()
+            End Using
+        End Using
+
+        Return count
     End Function
 End Class

@@ -4,6 +4,7 @@ Imports WebFormsVBNetChallenge.Model
 Public Class ChallengePage
     Inherits Page
 
+#Region "Properties"
     Protected Property SelectedProduct As Product
         Get
             Return Session("SelectedProduct")
@@ -57,12 +58,13 @@ Public Class ChallengePage
             Session("ProductTypeId") = value
         End Set
     End Property
+#End Region
 
     Protected ReadOnly _ProductService As ProductService = New ProductService
     Protected ReadOnly _ProductTypeService As ProductTypeService = New ProductTypeService
 
     Private Sub ShowMessage(message As String, messageType As MessageType)
-        Dim sb As StringBuilder = New StringBuilder
+        Dim sb = New StringBuilder
 
         Select Case messageType
             Case MessageType.Success

@@ -13,7 +13,7 @@ Public Class AddProductType
 
     Protected Sub BtnAdd_Click(sender As Object, e As EventArgs)
         If ValidateForm() Then
-            Dim newProductType As ProductType = New ProductType With {
+            Dim newProductType = New ProductType With {
                 .Name = txtName.Text
             }
 
