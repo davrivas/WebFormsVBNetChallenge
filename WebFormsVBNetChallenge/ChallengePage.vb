@@ -65,17 +65,23 @@ Public Class ChallengePage
 
     Private Sub ShowMessage(message As String, messageType As MessageType)
         Dim sb = New StringBuilder
+        sb.Append("<script>")
+        sb.Append("function showMessage() {")
 
         Select Case messageType
             Case MessageType.Success
-                sb.Append($"<div class='alert alert-success'>{message}</div>")
+                sb.Append($"    toastr.success('{message}', 'Success');")
                 Exit Select
             Case MessageType.ErrorM
-                sb.Append($"<div class='alert alert-danger'>{message}</div>")
+                sb.Append($"    toastr.error('{message}', 'Error');")
                 Exit Select
         End Select
 
-        Response.Write(sb.ToString)
+        sb.Append("}")
+        sb.Append("</script>")
+
+        ClientScript.RegisterClientScriptBlock(Me.GetType(), "message", sb.ToString)
+        ClientScript.RegisterStartupScript(Me.GetType(), "message", "<script>$(function(){showMessage();});</script>")
     End Sub
 
     Protected Sub HandleException(ex As Exception)
