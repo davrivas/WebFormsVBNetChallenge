@@ -7,7 +7,6 @@
 
             Try
                 SelectedProduct = _ProductService.GetById(ProductId)
-                btnDelete.CommandArgument = SelectedProduct.Id.ToString
                 ProductId = Nothing
             Catch ex As Exception
                 HandleException(ex)
