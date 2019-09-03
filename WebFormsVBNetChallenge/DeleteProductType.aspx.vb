@@ -24,8 +24,6 @@
         End If
 
         Title = $"Delete product type {SelectedProductType.Name}"
-
-        If ErrorMessage IsNot Nothing Then ShowErrorMessage()
     End Sub
 
     Protected Sub BtnDelete_Click(sender As Object, e As EventArgs)

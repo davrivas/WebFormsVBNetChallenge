@@ -7,8 +7,6 @@ Public Class AddProductType
         If Not Page.IsPostBack Then
             lblNameValidation.Visible = False
         End If
-
-        If ErrorMessage IsNot Nothing Then ShowErrorMessage()
     End Sub
 
     Protected Sub BtnAdd_Click(sender As Object, e As EventArgs)

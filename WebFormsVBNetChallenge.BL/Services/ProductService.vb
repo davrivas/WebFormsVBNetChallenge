@@ -14,12 +14,14 @@ Public Class ProductService
                     connection.Open()
 
                     Dim identifierParameter = command.Parameters.Add("@Identifier", SqlDbType.NVarChar)
-                    'Dim code As String = String.Empty
 
-                    'Do
+                    Dim code As String = String.Empty
 
-                    'Loop
-                    identifierParameter.Value = CodeGenerator.GenerateCode ' check if this exists
+                    Do
+                        code = CodeGenerator.GenerateCode
+                    Loop Until Not ProductIdentifierExists(code)
+
+                    identifierParameter.Value = code
 
                     Dim descriptionParameter = command.Parameters.Add("@Description", SqlDbType.NVarChar)
                     descriptionParameter.Value = entity.Description
@@ -167,7 +169,33 @@ Public Class ProductService
     End Function
 
     Public Function ProductIdentifierExists(identifier As String) As Boolean
-        Throw New NotImplementedException
+        Try
+            Dim exists As Boolean = True
+
+            Using connection As SqlConnection = New SqlConnection(ConnectionString)
+                Using command As SqlCommand = connection.CreateCommand()
+                    command.CommandText = "ProductIdentifierExists"
+                    command.CommandType = CommandType.StoredProcedure
+
+                    Dim productIdParameter = command.Parameters.Add("@Identifier", SqlDbType.NVarChar)
+
+                    productIdParameter.Value = identifier
+
+                    connection.Open()
+
+                    Using reader As SqlDataReader = command.ExecuteReader(CommandBehavior.CloseConnection)
+                        Dim number As Integer = Integer.Parse(reader.Read.ToString)
+                        exists = IIf(number.Equals(1), True, False)
+                    End Using
+
+                    connection.Close()
+                End Using
+            End Using
+
+            Return exists
+        Catch ex As Exception
+            Throw ex
+        End Try
     End Function
 
     Private Function GetProduct(reader As SqlDataReader) As Product

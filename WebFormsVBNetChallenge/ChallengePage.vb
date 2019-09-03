@@ -65,28 +65,19 @@ Public Class ChallengePage
 
     Private Sub ShowMessage(message As String, messageType As MessageType)
         Dim sb = New StringBuilder
-        sb.Append("<script>")
-        sb.Append("function showMessage() {")
+        sb.AppendLine("<script>")
+        sb.AppendLine("    $(function () {")
+        sb.AppendLine(String.Format("        showMessage(""{0}"", {1});", message, Convert.ToInt32(messageType)))
+        sb.AppendLine("    });")
+        sb.AppendLine("</script>")
 
-        Select Case messageType
-            Case MessageType.Success
-                sb.Append($"    toastr.success('{message}', 'Success');")
-                Exit Select
-            Case MessageType.ErrorM
-                sb.Append($"    toastr.error('{message}', 'Error');")
-                Exit Select
-        End Select
-
-        sb.Append("}")
-        sb.Append("</script>")
-
-        ClientScript.RegisterClientScriptBlock(Me.GetType(), "message", sb.ToString)
-        ClientScript.RegisterStartupScript(Me.GetType(), "message", "<script>$(function(){showMessage();});</script>")
+        ClientScript.RegisterStartupScript(Me.GetType(), "message", sb.ToString)
     End Sub
 
     Protected Sub HandleException(ex As Exception)
         Debug.WriteLine(ex.StackTrace)
         ErrorMessage = ex.Message
+        ShowErrorMessage()
     End Sub
 
     Protected Sub ShowSuccessMessage()

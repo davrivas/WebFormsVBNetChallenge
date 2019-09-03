@@ -149,6 +149,7 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="ProductTypes.aspx" />
+    <Content Include="Scripts\app\message.js" />
     <Content Include="Scripts\app\nav-bar.js" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />

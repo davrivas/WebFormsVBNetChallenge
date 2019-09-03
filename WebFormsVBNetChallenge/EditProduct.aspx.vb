@@ -34,8 +34,6 @@ Public Class EditProduct
         End If
 
         Title = "Edit product (" & SelectedProduct.Description & ")"
-
-        If ErrorMessage IsNot Nothing Then ShowErrorMessage()
     End Sub
 
     Protected Sub BtnEdit_Click(sender As Object, e As EventArgs)

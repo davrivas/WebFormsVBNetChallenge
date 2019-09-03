@@ -18,8 +18,6 @@ Public Class AddProduct
                 HandleException(ex)
             End Try
         End If
-
-        If ErrorMessage IsNot Nothing Then ShowErrorMessage()
     End Sub
 
     Protected Sub BtnAdd_Click(sender As Object, e As EventArgs)
