@@ -184,8 +184,12 @@ Public Class ProductService
                     connection.Open()
 
                     Using reader As SqlDataReader = command.ExecuteReader(CommandBehavior.CloseConnection)
-                        Dim number As Integer = Integer.Parse(reader.Read.ToString)
-                        exists = IIf(number.Equals(1), True, False)
+                        If (reader.Read) Then
+                            Dim number As Integer = Integer.Parse(reader("ProductCount").ToString)
+                            exists = IIf(number.Equals(1), True, False)
+                        Else
+                            exists = False
+                        End If
                     End Using
 
                     connection.Close()

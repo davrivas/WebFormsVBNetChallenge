@@ -163,4 +163,38 @@ Public Class ProductTypeService
 
         Return count
     End Function
+
+    Public Function ProductTypeNameExists(name As String) As Boolean
+        Try
+            Dim exists As Boolean = True
+
+            Using connection As SqlConnection = New SqlConnection(ConnectionString)
+                Using command As SqlCommand = connection.CreateCommand()
+                    command.CommandText = "ProductTypeNameExists"
+                    command.CommandType = CommandType.StoredProcedure
+
+                    Dim productIdParameter = command.Parameters.Add("@Name", SqlDbType.NVarChar)
+
+                    productIdParameter.Value = name
+
+                    connection.Open()
+
+                    Using reader As SqlDataReader = command.ExecuteReader(CommandBehavior.CloseConnection)
+                        If (reader.Read) Then
+                            Dim number As Integer = Integer.Parse(reader("ProductTypeCount").ToString)
+                            exists = IIf(number.Equals(1), True, False)
+                        Else
+                            exists = False
+                        End If
+                    End Using
+
+                    connection.Close()
+                End Using
+            End Using
+
+            Return exists
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Function
 End Class

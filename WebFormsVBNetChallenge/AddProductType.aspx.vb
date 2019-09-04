@@ -32,6 +32,10 @@ Public Class AddProductType
             isValid = False
             lblNameValidation.Visible = True
             lblNameValidation.Text = "You must provide a name"
+        ElseIf _ProductTypeService.ProductTypeNameExists(txtName.Text) Then
+            isValid = False
+            lblNameValidation.Visible = True
+            lblNameValidation.Text = "This product type name is already used"
         Else
             lblNameValidation.Visible = False
         End If
